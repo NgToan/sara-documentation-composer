@@ -4,5 +4,6 @@ PyYAML==3.13
 pytest
 pandoc==2.0a4
 pandas
+python-redmine
 lxml
 openpyxl

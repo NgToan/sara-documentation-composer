@@ -5,10 +5,6 @@ from jinja2 import Environment, FileSystemLoader
 from jinja2.exceptions import TemplateNotFound
 
 import pandas as pd
-#from htmldocx import HtmlToDocx
-
-#import win32com.client
-
 
 
 import related
