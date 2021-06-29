@@ -1,11 +1,15 @@
 import argparse
 import sys
+import os
 from jinja2 import Environment, FileSystemLoader
 from jinja2.exceptions import TemplateNotFound
+
+import pandas as pd
 
 import related
 
 from models import Project, Document
+
 
 
 class Cmd:
@@ -81,7 +85,34 @@ class Cmd:
             'project': self.project
         }
         result = self._template.render(args)
-        print(result)
+
+        # Creation du fichier Asciidoc contenant le rapport
+        w = open("temporaryrender.adoc", "w")
+        w.write(result)
+        w.close()
+
+        # Conversion du fichier Asciidoc en PDF et ouverture
+        os.system("asciidoctor-pdf temporaryrender.adoc")
+        os.system(".\\temporaryrender.pdf")
+
+        # Conversion du fichier Asciidoc en HTML et ouverture
+        os.system("asciidoctor temporaryrender.adoc")
+        os.system(".\\temporaryrender.html")
+
+        # Conversion du fichier HTML au format WORD et Mise en page
+        os.system("pandoc --reference-doc custom-reference.docx temporaryrender.html -o temporaryrender.docx")
+        os.system(".\\temporaryrender.docx")
+
+        # Conversion du fichier HTML au format EXCEL, recuperation des tableaux uniquement
+        file_path = 'temporaryrender.html'
+        with open(file_path, 'r') as f:
+            table = pd.read_html(f.read())
+            len_tab = len(table)
+            print(f'Total tables: {len_tab}')
+            df = pd.concat(table[0:len_tab])
+        df.to_excel("temporaryrender.xlsx")
+        os.system(".\\temporaryrender.xlsx")
+
 
     def sample(self):
         self.render()
