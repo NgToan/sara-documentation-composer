@@ -27,7 +27,7 @@ For each of the measurements, we cover the following items:
 
 The conclusions are derived from good practices and should be taken as a guide instead of a prescription.
 
-__This analysis has been done without knowledge (science, SW implementation…) on this project. Please do not hesitate to mention any error or misunderstanding.__
+__This analysis has been done without knowledge (science, SW implementation...) on this project. Please do not hesitate to mention any error or misunderstanding.__
 
 
 [IMPORTANT]
